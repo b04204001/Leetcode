@@ -23,7 +23,6 @@ public:
                  ans %= mod;
             }
         }
-        
         return ans;
     }
 };

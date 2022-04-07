@@ -3,7 +3,7 @@ class Solution {
 public:
     int lastStoneWeight(vector<int>& stones) {
         make_heap(stones.begin(), stones.end(), less<int>());
-        //sort_heap(stones.begin(), stones.end(), less<int>());
+        sort_heap(stones.begin(), stones.end(), greater<int>());
         int max1,max2;
         while(stones.size() >1){
             max1 = stones[0];

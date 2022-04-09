@@ -13,6 +13,7 @@ public:
         for(auto i:count) cnt.push_back({i.first,i.second});
         sort(cnt.begin(),cnt.end(),cmp);
         vector<int> result;
+        
         for(int i =0; i<k;i++){
             result.push_back(cnt[i].first);
         } 

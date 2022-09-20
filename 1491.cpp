@@ -17,3 +17,23 @@ public:
         return sum/(double)(salary.size()-2);
     }
 };
+
+
+
+//
+class Solution {
+public:
+    double average(vector<int>& salary) {
+        int n = salary.size();
+        double ans=0;
+        sort(salary.begin(),salary.end());
+        for(int i=0;i<n;i++){
+            ans += salary[i];
+        }
+        ans = ans - salary[0] - salary[n-1];
+        return ans/(n-2);
+    }
+};
+
+
+//

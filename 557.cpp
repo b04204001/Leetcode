@@ -7,6 +7,8 @@ public:
             reverse(t.begin(), t.end());
             ans += t + ' ';
         }
-        return ans.substr(0, ans.size() - 1); 
+        ans.substr();
+        ans.resize(ans.size()- 1);
+        return ans; 
     }
 };

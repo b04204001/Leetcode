@@ -1,0 +1,13 @@
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        if (n <=0) return false;
+        //1. n & n-1去掉最右邊的1，如果=0代表是
+        if ((n & (n-1)) == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};

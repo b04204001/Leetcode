@@ -13,7 +13,7 @@ public:
             min_stack.push_back(val);
         }
         else{
-            if (val < stack[top_id]){
+            if (val < min_stack[top_id]){
                 min_stack.push_back(val);
             }
             else{

@@ -17,7 +17,7 @@ public:
         ListNode* lastsort = head;
         ListNode* curr= head->next;
         while(curr != nullptr){
-            if( curr->val > lastsort->val){
+            if( curr->val >= lastsort->val){
                 lastsort = lastsort->next;
             }
             else{

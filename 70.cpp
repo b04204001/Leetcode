@@ -8,7 +8,7 @@ public:
         //A[3] = 3;
         //A[4] = 5
         //A[5] =  1 +4 +3 =8
-        for(int i=3;i<=n;i++){
+        for(int i=3;i<=n+1;i++){
             A[i] = A[i-1] +A[i-2];
         }
         return A[n];

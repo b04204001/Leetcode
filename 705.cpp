@@ -1,24 +1,20 @@
-//20220421 daily
 class MyHashSet {
-    int A[1000001];
 public:
+    vector<bool> hash;
     MyHashSet() {
-        int A[1000001];
+        hash.assign(1000001,false);
     }
     
     void add(int key) {
-        A[key]=1;
+        hash[key] = true;
     }
     
     void remove(int key) {
-        A[key]=0;
+        hash[key] = false;
     }
     
     bool contains(int key) {
-        if(A[key] >0)
-            return true;
-        else
-            return false;
+        return hash[key]? true:false;
     }
 };
 

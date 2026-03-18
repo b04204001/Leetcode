@@ -1,6 +1,5 @@
 class Solution {
 public:
-
     void MergeSort(vector<int>& nums ,vector<int>& temp, int left , int right){
         if (left >= right) return;
         //1. 拆分一半
@@ -14,7 +13,7 @@ public:
         int idx = left;
         //同時比較
         while(l <= mid && r <= right){
-            if(nums[l] >= nums[r] ){
+            if(nums[l] > nums[r] ){
                 temp[idx++] = nums[r++];
             }
             else{
@@ -33,12 +32,9 @@ public:
         }
         return;
     }
-
-
     vector<int> sortArray(vector<int>& nums) {
         int n = nums.size();
         vector<int> temp(n, 0);
-        //Quicksort(nums,0,n-1);
         MergeSort(nums,temp,0,n-1);
         return nums;
     }

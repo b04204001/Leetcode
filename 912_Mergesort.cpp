@@ -3,7 +3,7 @@ public:
     void MergeSort(vector<int>& nums ,vector<int>& temp, int left , int right){
         if (left >= right) return;
         //1. 拆分一半
-        int mid = (left + right) /2;
+        int mid = left + (right - left) / 2;
         MergeSort(nums ,temp,left , mid);
         MergeSort(nums ,temp,mid+1 , right);
 

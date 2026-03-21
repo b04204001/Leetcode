@@ -3,7 +3,7 @@ class Solution {
 public:
     int lastStoneWeight(vector<int>& stones) {
         make_heap(stones.begin(), stones.end(), less<int>());
-        sort_heap(stones.begin(), stones.end(), greater<int>());
+        sort_heap(stones.begin(), stones.end(), greater<int>()); 
         int max1,max2;
         while(stones.size() >1){
             max1 = stones[0];
@@ -30,6 +30,7 @@ public:
         for(int s : stones){
             pq.push(s);
         }
+        //priority_queue<int> pq(stones.begin(), stones.end());  //這樣似乎更快 
         while(pq.size() > 1){
             int m = pq.top();
             pq.pop();

@@ -20,3 +20,24 @@ public:
         return stones.size() ? stones.front() : 0;
     }
 };
+
+
+//
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        priority_queue<int> pq;
+        for(int s : stones){
+            pq.push(s);
+        }
+        while(pq.size() > 1){
+            int m = pq.top();
+            pq.pop();
+            int n = pq.top();
+            pq.pop();
+            if(m-n != 0) pq.push((m-n));
+        }
+        if(!pq.empty()) return pq.top() ;
+        return 0;
+    }
+};

@@ -16,6 +16,7 @@ public:
 
     int findKthLargest(vector<int>& nums, int k) {
         int n = nums.size();
+        //最後一個非葉子節點：n / 2 - 1
         for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(nums, n, i);
         }

@@ -23,5 +23,28 @@ public:
         return grid;
     }
 };
+// reverse似乎也是這樣實作的?
+
+//更快的方法
+class Solution {
+public:
+    vector<vector<int>> reverseSubmatrix(vector<vector<int>>& grid, int x, int y, int k) {
+        int top = x;
+        int bottom = x + k - 1;
+        
+        while (top < bottom) {
+            // 🌟 呼叫 C++ 底層的記憶體搬運工，直接交換一整段區間！
+            swap_ranges(grid[top].begin() + y, 
+                        grid[top].begin() + y + k, 
+                        grid[bottom].begin() + y);
+            top++;
+            bottom--;
+        }
+        
+        return grid;
+    }
+};
+
+
 
 

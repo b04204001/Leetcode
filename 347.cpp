@@ -21,3 +21,47 @@ public:
         return result;
     }
 };
+
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int, int> freq;
+
+        // Step 1: 計算頻率
+        for (int num : nums) {
+            freq[num]++;
+        }
+
+        // Step 2: min heap（小頂堆）
+        // pair<數字, 頻率>
+        auto cmp = [](pair<int,int>& a, pair<int,int>& b) {
+            return a.second > b.second; // 小的在上面
+        };
+
+        priority_queue<
+            pair<int,int>,
+            vector<pair<int,int>>,
+            decltype(cmp)
+        > pq(cmp);
+
+        // Step 3: 把元素丟進 heap
+        for (auto& [num, count] : freq) {
+            pq.push({num, count});
+
+            // 如果超過 k，就把最小的丟掉
+            if (pq.size() > k) {
+                pq.pop();
+            }
+        }
+
+        // Step 4: 把答案取出
+        vector<int> ans;
+        while (!pq.empty()) {
+            ans.push_back(pq.top().first);
+            pq.pop();
+        }
+
+        return ans;
+    }
+};

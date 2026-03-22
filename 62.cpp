@@ -37,3 +37,35 @@ public:
         return dp[m - 1][n - 1];
     }
 };
+
+
+//一維
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        vector<int> dp(n, 1);
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[j] = dp[j] + dp[j - 1];
+            }
+        }
+
+        return dp[n - 1];
+    }
+};
+// m+n版本，挑選一條路走
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        long long ans = 1;
+        int total = m + n - 2;
+        int choose = min(m - 1, n - 1);
+
+        for (int i = 1; i <= choose; i++) {
+            ans = ans * (total - choose + i) / i;
+        }
+
+        return (int)ans;
+    }
+};

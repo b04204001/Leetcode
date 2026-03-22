@@ -30,3 +30,18 @@ public:
         return ans;;
     }
 };
+//模板
+sort(intervals.begin(), intervals.end());
+
+current = intervals[0];
+
+for (下一個區間) {
+    if (重疊) {
+        合併
+    } else {
+        push current
+        current = 下一個區間
+    }
+}
+
+push 最後一個 current

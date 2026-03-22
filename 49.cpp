@@ -13,7 +13,7 @@ public:
         }
         //遍歷hash，把second加到ans
         //for( pair< const string, vector<string>> x : mp)
-        for(auto x : mp){
+        for(auto& x : mp){
             ans.push_back(x.second);
         }
         return ans;

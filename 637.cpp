@@ -10,26 +10,27 @@
  * };
  */
 class Solution {
-public:    
+public:
     vector<double> averageOfLevels(TreeNode* root) {
-        vector<double> ans;
+        vector<double>  ans;
+        if(root == nullptr) return ans;
         queue<TreeNode*> q;
         q.push(root);
         while(!q.empty()){
-            long temp=0;
-            int size= q.size();
-            for(int i=0;i<size;i++){
-                TreeNode * node = q.front();
+            //每層
+            int levelsize = q.size();
+            double sum = 0;
+            for(int i=0;i<levelsize;i++){
+                TreeNode* cur = q.front();
                 q.pop();
-                if(node->left!=NULL) q.push(node->left);
-                if(node->right!=NULL) q.push(node->right);
-                temp+=node->val;
+                sum+= cur->val;
+                if(cur->left) q.push(cur->left);
+                if(cur->right) q.push(cur->right);
             }
-            ans.push_back((double)temp/size);
+            ans.push_back(sum);
         }
+
         return ans;
     }
 };
-
-
 

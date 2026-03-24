@@ -8,10 +8,11 @@ public:
         vector<bool> dp(n + 1, false);
 
         dp[0] = true;
-
+        //前i個字元結果
         for (int i = 1; i <= n; i++) {
+            //最後一段開始位置
             for (int j = 0; j < i; j++) {
-                //因為前j已經確認是word，所以要確認 i-j長度的字串( j ~ i)
+                //最後一段開始是j，所以先確認前j個結果，正確再看 從j開始到i的結果是否在dict中
                 if (dp[j] && st.count(s.substr(j, i - j))) {
                     dp[i] = true;
                     break;

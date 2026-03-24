@@ -14,7 +14,7 @@ public:
                 if( points[i][1] < target[1]){
                     target[1] = points[i][1];
                 }
-                if( points[i][0] < target[0]){
+                if( points[i][0] > target[0]){
                     target[0] = points[i][0];
                 }
             }

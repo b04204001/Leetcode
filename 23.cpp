@@ -1,29 +1,34 @@
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        // c++ pq預設是max heap，所以要拿小的要做成Min heap， true ->代表優先權低，所以讓a > b 代表大的數字優先權低。
+        // C++ priority_queue 預設是 max heap
+        // 這裡用自訂 comparator 讓 val 較小的節點優先出來（min heap）
         auto cmp = [](ListNode* a, ListNode* b) {
-            return a->val > b->val; // 小的優先
+            return a->val > b->val;
         };
 
         priority_queue<ListNode*, vector<ListNode*>, decltype(cmp)> pq(cmp);
 
-        // 初始化：把每個 list 的頭放進去
+        // 先把每條 linked list 的頭節點放進 pq
+        // pq 中永遠維護「每條 list 目前的頭」
         for (auto node : lists) {
             if (node) pq.push(node);
         }
-        //dummy
+
+        // dummy node 方便串接答案
         ListNode dummy(0);
         ListNode* cur = &dummy;
-        //每次拿座小的接上去，然後往下一個節點直到沒有
-        //cur是接的，node是pq取出來的下一個。
+
+        // 每次取出目前最小的節點，接到答案尾端
         while (!pq.empty()) {
             ListNode* node = pq.top();
             pq.pop();
 
             cur->next = node;
             cur = cur->next;
-            //把「剛剛取出那條 list 的下一個節點」丟回候選集合
+
+            // 若該節點後面還有節點，
+            // 代表這條 list 有新的「頭」可以加入候選集合
             if (node->next) {
                 pq.push(node->next);
             }

@@ -1,0 +1,29 @@
+//左邊用 max heap 存較小一半，右邊用 min heap 存較大一半，
+//理想上small存多一個
+class MedianFinder {
+public:
+    priority_queue<int> small; // max heap
+    priority_queue<int, vector<int>, greater<int>> large; // min heap
+
+    MedianFinder() {
+    }
+
+    void addNum(int num) {
+        small.push(num);
+        large.push(small.top());
+        small.pop();
+
+        if (large.size() > small.size()) {
+            small.push(large.top());
+            large.pop();
+        }
+    }
+
+    double findMedian() {
+        if (small.size() > large.size()) {
+            return small.top();
+        }
+        return (small.top() + large.top()) / 2.0;
+    }
+};
+

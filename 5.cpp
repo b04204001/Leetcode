@@ -9,12 +9,12 @@ public:
     void expand(const string& s, int left, int right) {
         while (left >= 0 && right < s.length() && s[left] == s[right]) {
             int len = right - left + 1;
-
+            //紀錄最長
             if (len > maxLen) {
                 maxLen = len;
                 start = left;
             }
-
+            //擴展
             left--;
             right++;
         }

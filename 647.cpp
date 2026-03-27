@@ -1,3 +1,22 @@
+class Solution {
+public:
+    int countsub(string s, int left ,int right){
+        if( left <0 || right >= s.length() ) return 0;
+        if( s[left] != s[right]) return 0;
+        //目前字串已經是回文，往左右擴展
+        return 1 + countsub(s,left-1,right+1);
+    }
+    int countSubstrings(string s) {
+        int n = s.length();
+        int ans = 0;
+        for(int i=0;i<n;i++){
+            ans += countsub(s,i,i) + countsub(s,i,i+1);
+        }
+        return ans;
+    }
+};
+
+
 //中心擴展
 因為回文分成奇數偶數，分為兩種狀況
 (i,i)左右擴展 / (i,i+1)左右擴展

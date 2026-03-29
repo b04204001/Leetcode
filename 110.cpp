@@ -20,7 +20,7 @@ public:
         if(root==nullptr) return true;
         int lh = dfs_height(root->left);
         int rh = dfs_height(root->right);
-        if(abs(rh - lh) <= 1) return true;
+        if(abs(rh - lh) > 1) return false;
         
         return isBalanced(root->left) && isBalanced(root->right);;
     }

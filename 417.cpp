@@ -1,3 +1,50 @@
+class Solution {
+public:
+    int m;
+    int n;
+    void dfs(vector<vector<int>>& heights , vector<vector<bool>>& ocean ,int i,int j ,int prevHeight){
+        if( i< 0 || j <0 || i>=m || j >=n ) return;
+        if (ocean[i][j]) return;
+        if (heights[i][j] < prevHeight) return;
+        
+        ocean[i][j] = true;
+
+        dfs(heights ,ocean ,i+1 ,j , heights[i][j]);
+        dfs(heights ,ocean ,i-1 ,j , heights[i][j]);
+        dfs(heights ,ocean ,i ,j+1,heights[i][j]);
+        dfs(heights ,ocean ,i ,j-1,heights[i][j]);
+        return;
+    }
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        m = heights.size();
+        n = heights[0].size();
+        vector<vector<int>> ans;
+        vector<vector<bool>> pacific(m , vector<bool>(n,false));
+        vector<vector<bool>> atlantic(m , vector<bool>(n,false));
+        for(int i =0;i<m;i++){
+            dfs(heights ,pacific ,i ,0 ,heights[i][0] );
+            dfs(heights ,atlantic ,i ,n-1 , heights[i][n-1]);
+        }
+
+        for(int j = 0 ;j < n ;j++){
+            dfs(heights ,pacific ,0 ,j, heights[0][j]);
+            dfs(heights ,atlantic ,m-1 ,j , heights[m-1][j]);
+        }
+        for(int i =0;i<m;i++){
+            for(int j = 0 ;j < n ;j++){
+                if(atlantic[i][j] == pacific[i][j] && pacific[i][j] == true){
+                    vector<int> pair;
+                    pair.push_back(i);
+                    pair.push_back(j);
+                    ans.push_back(pair);
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+
 //從海邊出法，哪格可以走到，做兩次DFS，從pacific和altantic，同時可以走道就是答案
 class Solution {
 public:

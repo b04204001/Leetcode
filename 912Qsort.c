@@ -16,13 +16,14 @@ void Qsort(int* nums ,int left , int right){
         swap((nums + left) , (nums + (right + left)/2 ) );
     }
     //左右
-    if( *(nums + left) < *(nums + right) ){
+    if( *(nums + left) > *(nums + right) ){
         swap((nums + left) , (nums + right ));
     } 
     //中又
     if( *(nums + (right + left)/2 ) > *(nums + right)) {  
         swap((nums + (right + left)/2 ) , (nums + right) );
     }
+    swap((nums + left) , (nums + (right + left)/2 ) );
     int pivot= *(nums + left);
     //開始n次
     int l = left + 1;

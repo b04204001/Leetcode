@@ -2,12 +2,17 @@
 class Solution {
 public:
     vector<int> solveQueries(vector<int>& nums, vector<int>& queries) {
-        vector<int> ans;
         int n = nums.size();
+        vector<int> ans;
+        unordered_map<int , vector<int>> mp;
+        for(int i=0;i<n;i++){
+            mp[nums[i]].push_back(i);
+        }
         for(auto q: queries){
+            if(!mp.contains(nums[q])) continue;
             int min_d = INT_MAX;
-            for(int i=0;i<n;i++){
-                if(nums[i] == nums[q] && i != q){
+            for(auto i : mp[nums[q]]){
+                if(i != q){
                     int left = abs(i - q) % n;
                     int right = n - abs(i - q ) % n;
                     if(min_d > left){
@@ -16,6 +21,7 @@ public:
                     if(min_d > right){
                         min_d = right;
                     }
+                    if( min_d == 1) break;
                 }
             }
             if(min_d == INT_MAX){
@@ -26,4 +32,3 @@ public:
         return ans;
     }
 };
-

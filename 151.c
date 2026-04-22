@@ -43,6 +43,7 @@ char* reverseWords(char* s) {
             end++;
         }
     }
+    //最後一個word反轉
     reverse(start,end-1);
     return s;
 }

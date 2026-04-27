@@ -16,21 +16,23 @@ public:
             {{0, -1}, {-1, 0}}, // 5
             {{-1, 0}, {0, 1}}   // 6
         };
-
+        // BFS Queue 紀錄可到位置
         queue<pair<int, int>> q;
         q.push({0, 0});
-        
+        //記錄走過
         vector<vector<bool>> visited(m, vector<bool>(n, false));
         visited[0][0] = true;
-
+        //開始走
         while (!q.empty()) {
+            //確認當下位置
             auto [r, c] = q.front();
             q.pop();
-
+            //檢測是否到達
             if (r == m - 1 && c == n - 1) return true; // 到達終點
 
             // 嘗試從當前水管提供的兩個開口走出去
             for (auto& dir : directions[grid[r][c]]) {
+                //下一個位置
                 int nr = r + dir.first;
                 int nc = c + dir.second;
 
@@ -44,7 +46,7 @@ public:
                             break;
                         }
                     }
-
+                    //可以接通紀錄結果並放入queue
                     if (canConnectBack) {
                         visited[nr][nc] = true;
                         q.push({nr, nc});

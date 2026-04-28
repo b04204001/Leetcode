@@ -9,3 +9,17 @@ int hammingDistance(int x, int y) {
     }
     return cnt;
 }
+
+憂解
+int hammingDistance(int x, int y) {
+    int dist = 0;
+    // 先做 XOR，找出所有不同的位元
+    unsigned int n = x ^ y; 
+    
+    // 計算 n 裡面有多少個 1 (Popcount)
+    while (n > 0) {
+        n &= (n - 1); // 布萊恩·克尼漢演算法：每次消除最右邊的 1
+        dist++;
+    }
+    return dist;
+}

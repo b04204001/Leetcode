@@ -35,3 +35,25 @@ char* addBinary(char* a, char* b) {
     
     return ans;
 }
+
+//全bit manipulation版本
+char* addBinary(char* a, char* b) {
+    int alen = strlen(a);
+    int blen = strlen(b);
+
+    int num = 0;
+    int len = (alen > blen) ? alen + 2: blen +2 ;
+    char* ans = (char*) malloc( len * sizeof(char));
+    int i = alen-1;
+    int j = blen-1;
+    int carry = 0;
+    while(i >= 0 || j >= 0 || carry >0){
+        int va = i >= 0 ? a[i--] - '0' : 0;
+        int vb = j >= 0 ? b[j--] - '0' : 0;
+        ans[num++] = (va ^ vb ^ carry ) + '0';
+        carry = ( va & vb ) || (vb & carry) || (carry & va) ;
+    }
+    ans[num] = '\0';
+    reverse(ans,num);
+    return ans;
+}

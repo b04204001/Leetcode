@@ -40,3 +40,37 @@ public:
         return max_len;
     }
 };
+
+
+//hash set法
+class Solution {
+public:
+    int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
+        unordered_set<int> prefixes;
+        
+        // 1. 將 arr1 的所有數字及其所有前綴加入集合
+        for (int val : arr1) {
+            while (val > 0) {
+                prefixes.insert(val);
+                val /= 10;
+            }
+        }
+        
+        int max_len = 0;
+        
+        // 2. 檢查 arr2 的數字前綴是否在集合中
+        for (int val : arr2) {
+            while (val > 0) {
+                if (prefixes.count(val)) {
+                    // 數字轉字串的長度等於 log10(val) + 1
+                    int len = to_string(val).length(); 
+                    max_len = max(max_len, len);
+                    break; // 找到目前數字的最長前綴，更短的不用再找了
+                }
+                val /= 10;
+            }
+        }
+        
+        return max_len;
+    }
+};

@@ -15,7 +15,7 @@ public:
                 //比mid大，右半 + 左開頭 
                 else{
                     //右半
-                    if(target < nums[j]){
+                    if(target <= nums[j]){
                         i = mid + 1;
                     }
                     //左開頭

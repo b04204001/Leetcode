@@ -1,39 +1,25 @@
 class Solution {
 public:
-    bool caneat(vector<int>& piles , int speed, int h){
-        int time =0;
-        for(int pile : piles){
-            time += (pile-1)/speed + 1;
-            if(time >h){
-                return false;
-            }
-        }
-        return true;
-    }
-
     int minEatingSpeed(vector<int>& piles, int h) {
-        int left = 1;
-        int n = piles.size();
-        int right = piles[0];
-        for(int i=0;i<n;i++){
-            if(piles[i] > right){
-                right = piles[i];
+        //對速率做二分搜尋，找符合條件的
+        int i = 1;
+        int j = *max_element(piles.begin(),piles.end());
+        int speed = j;
+        while(i <= j){
+            int mid = i + (j-i)/2;
+            long long total_h = 0;
+            for(auto p :piles){
+                total_h += (p + mid -1) / mid;
             }
-        }
-
-        while(left < right){
-            int mid = (right + left)/2;
-            if(caneat(piles,mid,h)){
-                right = mid;
+            if(total_h <= h){
+                speed = mid;
+                j = mid -1;
+                
             }
             else{
-                left = mid+1;
+                i = mid +1;
             }
         }
-        
-        return left;
+        return speed;
     }
 };
-
-
-

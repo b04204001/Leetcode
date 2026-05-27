@@ -71,8 +71,8 @@ public:
         // 如果一開始就沒有新鮮橘子，直接返回 0
         if (freshOranges == 0) return 0;
 
-        // 方向陣列：上、下、左、右
-        vector<int> dirs = {-1, 0, 1, 0, -1};
+        // 修正 2：把方向陣列移到最外面，全域只建立一次，省時省記憶體
+        vector<pair<int, int>> dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
         // 2. 開始 BFS 層序走訪
         while (!q.empty() && freshOranges > 0) {
@@ -82,17 +82,16 @@ public:
             for (int k = 0; k < size; k++) {
                 auto [r, c] = q.front();
                 q.pop();
-
-                // 檢查四個方向
-                for (int d = 0; d < 4; d++) {
-                    int nr = r + dirs[d];
-                    int nc = c + dirs[d + 1];
-
-                    // 判斷是否越界或是新鮮橘子
+                
+                // 在 BFS 內部取代原本的四個 if
+                for (auto& dir : dirs) {
+                    int nr = r + dir.first;
+                    int nc = c + dir.second;
+                    
                     if (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc] == 1) {
-                        grid[nr][nc] = 2; // 變成腐爛橘子
-                        q.push({nr, nc}); // 加入佇列以供下一分鐘擴散
-                        freshOranges--;   // 新鮮橘子減少
+                        grid[nr][nc] = 2;
+                        freshOranges--; // 修正 1：改回原本宣告的變數名稱 freshOranges
+                        q.push({nr, nc});
                     }
                 }
             }
@@ -102,3 +101,4 @@ public:
         return freshOranges == 0 ? minutes : -1;
     }
 };
+
